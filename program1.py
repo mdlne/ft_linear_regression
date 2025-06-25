@@ -6,7 +6,7 @@ import csv
 def estimate_p(a, b):
     km = int(input("Comment de kilométrage a votre voiture ?"))
     price = a * km + b
-    print(price)
+    # print(f"Votre voiture est estimée au prix de {price}")
     return price
 
 
@@ -23,10 +23,6 @@ def read_csv_thetas(csv_file_name):
 
         # Lire les lignes suivantes numero de la ligne[numéro de la colonne]
         for ligne in lecteur:
-            theta0 = int(ligne[0])
-            theta1 = int(ligne[1])
+            theta0 = float(ligne[0])
+            theta1 = float(ligne[1])
             return (theta0, theta1)
-
-
-# theta0, theta1 = read_csv_thetas("thetas.csv")
-# estimate_p(theta1, theta0)
