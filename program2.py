@@ -102,21 +102,19 @@ norm_price_list, min_price, max_price = normalize(price_list)
 theta0, theta1 = read_csv_thetas("thetas.csv")
 new_theta0, new_theta1 = deriver(theta0, theta1, norm_km_list, norm_price_list)
 
-denorm_theta1 = new_theta1 * (max_price - min_price) / (max_km - min_km)
-denorm_theta0 = (
-    min_price + new_theta0 * (max_price - min_price) - denorm_theta1 * min_km
-)
-
-
 denorm_km_list = denormalize(norm_km_list, min_km, max_km)
 # print(denorm_km_list)
 
 denorm_price_list = denormalize(norm_price_list, min_price, max_price)
 # print(denorm_price_list)
 
-write_csv_theta("thetas.csv", denorm_theta0, denorm_theta1)
+write_csv_theta("thetas.csv", new_theta0, new_theta1)
 
-print(estimate_p(denorm_theta0, denorm_theta1))
+min_km = min(denorm_km_list)
+max_km = max(denorm_km_list)
 
+denorm_price = estimate_p(new_theta0, new_theta1)
+price = denorm_price * (max_km - min_km) + min_km
+print(f"le prix de votre voiture est estimée à {price}")
 
 # ajouter visuel
