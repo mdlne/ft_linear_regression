@@ -103,6 +103,6 @@ new_theta0, new_theta1 = deriver(theta0, theta1, norm_km_list, norm_price_list)
 # write_csv_theta("thetas.csv", new_theta0, new_theta1)
 
 
-print(estimate_p(new_theta1, new_theta0, min_km, max_km))
+print(estimate_p(new_theta1, new_theta0, min_km, max_km, min_price, max_price))
 
 # ajouter visuel

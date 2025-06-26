@@ -3,12 +3,11 @@
 import csv
 
 
-def estimate_p(a, b, min, max):
-    print(a, b, min, max)
+def estimate_p(a, b, min_km, max_km, min_price, max_price):
     km = int(input("Comment de kilométrage a votre voiture ?"))
-    norm_km = (km - min) / (max - min)
+    norm_km = (km - min_km) / (max_km - min_km)
     denom_price = a * norm_km + b
-    norm_price = denom_price * (max - min) + min
+    norm_price = denom_price * (max_price - min_price) + min_price
     # print(f"Votre voiture est estimée au prix de {price}")
     return norm_price
 
