@@ -27,12 +27,9 @@ def normalize(my_list):
 
 
 # fonction qui denormalise
-def denormalize(my_list, min, max):
-    new_list = []
-    for number in my_list:
-        denorm_number = number * (max - min) + min
-        new_list.append(denorm_number)
-    return new_list
+def denormalize(norm_value, min, max):
+    denorm_number = norm_value * (max - min) + min
+    return denorm_number
 
 
 def deriver(theta0, theta1, norm_km_list, norm_price_list):
@@ -102,19 +99,10 @@ norm_price_list, min_price, max_price = normalize(price_list)
 theta0, theta1 = read_csv_thetas("thetas.csv")
 new_theta0, new_theta1 = deriver(theta0, theta1, norm_km_list, norm_price_list)
 
-denorm_km_list = denormalize(norm_km_list, min_km, max_km)
-# print(denorm_km_list)
 
-denorm_price_list = denormalize(norm_price_list, min_price, max_price)
-# print(denorm_price_list)
+# write_csv_theta("thetas.csv", new_theta0, new_theta1)
 
-write_csv_theta("thetas.csv", new_theta0, new_theta1)
 
-min_km = min(denorm_km_list)
-max_km = max(denorm_km_list)
-
-denorm_price = estimate_p(new_theta0, new_theta1)
-price = denorm_price * (max_km - min_km) + min_km
-print(f"le prix de votre voiture est estimée à {price}")
+print(estimate_p(new_theta1, new_theta0, min_km, max_km))
 
 # ajouter visuel
